@@ -3,8 +3,10 @@ package Day9;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.interactions.Actions;
 
 import java.util.ArrayList;
 
@@ -44,6 +46,25 @@ public class MouseAction {
         //click on Sign In
         driver.findElement(By.xpath("//*[text()='Sign In']")).click();
 
+//Declare mouse actions
+        Actions mouseAction = new Actions(driver);
 
+        //Hover over Send tab to open up the drop down list
+        try{
+            WebElement sendTab = driver.findElement(By.xpath("//*[text()='Send']"));
+            mouseAction.moveToElement(sendTab).perform();
+        } catch (Exception e) {
+            System.out.println("Unable to hover to Send tab " + e);
+        }//end of try-catch
+
+        Thread.sleep(2000);
+
+        //Click on Look Up ZIP Code
+        try{
+            WebElement zipCodeLookup = driver.findElement(By.xpath("//*[text()='Look Up a ZIP Code']"));
+            mouseAction.moveToElement(zipCodeLookup).click().perform();
+        } catch (Exception e) {
+            System.out.println("Unable to click on Look up a ZIP code " + e);
+        }//end of try-catch
     }//end of main
 }
